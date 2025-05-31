@@ -5,6 +5,7 @@ const AuthController = require("./auth.controller");
 const asyncErrorHandler = require("../../errors/asyncErrorHandler");
 const { registerValidator, loginValidator } = require("./auth.validator");
 const validateRequest = require("../../middlewares/validation.middleware");
+const authJWT = require("../../middlewares/auth.middleware");
 
 router.post(
   "/register",
@@ -22,7 +23,8 @@ router.post(
 
 router.get(
   "/profile",
-  asyncErrorHandler(AuthController.register.bind(AuthController))
+  authJWT,
+  asyncErrorHandler(AuthController.profile.bind(AuthController))
 );
 
 module.exports = router;

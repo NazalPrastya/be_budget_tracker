@@ -34,12 +34,12 @@ class AuthController {
 
   async profile(req, res, next) {
     try {
-      //   const result = await AuthService.profile(req.user.id);
+      const result = await AuthService.profile(req.user.id);
       res.status(200).json({
         status: 200,
         message: "User berhasil di ambil",
         success: true,
-        // data: result,
+        data: result,
       });
     } catch (err) {
       next(err);

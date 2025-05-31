@@ -1,10 +1,10 @@
 const HttpError = require("./HttpError");
 
-class UnathorizedError extends HttpError {
+class UnauthorizedError extends HttpError {
   constructor(message = "Forbidden") {
     super(message, 401);
-    this.name = "UnathorizedError";
+    this.name = "UnauthorizedError";
   }
 }
 
-module.exports = UnathorizedError;
+module.exports = UnauthorizedError;

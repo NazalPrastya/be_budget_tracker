@@ -36,7 +36,11 @@ class AuthService {
     return { user: userJson, token };
   }
 
-  async profile() {}
+  async profile(userId) {
+    return await User.findByPk(userId, {
+      attributes: { exclude: ["password"] },
+    });
+  }
 }
 
 module.exports = new AuthService();
