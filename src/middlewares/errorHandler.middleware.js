@@ -1,4 +1,4 @@
-const HttpError = require("./errors/HttpError");
+const HttpError = require("../errors/HttpError");
 
 function errorHandler(err, req, req, res, next) {
   if (err instanceof HttpError) {
