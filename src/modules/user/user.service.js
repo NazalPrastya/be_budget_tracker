@@ -23,7 +23,7 @@ class UserService {
     const hash = await bcrypt.hash(data.password, this.SALT_ROUNDS);
 
     const user = await User.create({ ...data, password: hash });
-    const userJson = data.toJSON();
+    const userJson = user.toJSON();
     delete userJson.password;
 
     return userJson;
