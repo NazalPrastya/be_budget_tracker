@@ -1,5 +1,3 @@
-const sequelize = require("../../store/sequelize");
-
 module.export = (sequelize, DataTypes) => {
   const MonthlySummary = sequelize.define(
     "MonthlySummary",
@@ -44,8 +42,19 @@ module.export = (sequelize, DataTypes) => {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
+      created_at: {
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      },
+      updated_at: {
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      },
     },
     {
+      sequelize,
       tableName: "monthly_summaries",
       timestamps: true,
     }
@@ -54,7 +63,7 @@ module.export = (sequelize, DataTypes) => {
   MonthlySummary.associate = (models) => {
     MonthlySummary.belongsTo(models.User, {
       foreginKey: "user_id",
-      as: "user",
+      as: "summary_user",
     });
   };
   return MonthlySummary;
