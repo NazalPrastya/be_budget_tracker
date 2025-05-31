@@ -1,5 +1,3 @@
-const sequelize = require("../../store/sequelize");
-
 module.export = (sequelize, DataTypes) => {
   const Category = sequelize.define(
     "Category",
