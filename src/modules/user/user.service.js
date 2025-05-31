@@ -1,9 +1,8 @@
 const { User } = require("../../../models");
 const bcrypt = require("bcrypt");
-const { BadRequestError } = require("../../../errors/BadRequestError");
 const NotFound = require("../../errors/NotFoundError");
 const ServerError = require("../../errors/ServerError");
-const { use } = require("react");
+const BadRequestError = require("../../errors/BadRequestError");
 class UserService {
   constructor() {
     this.SALT_ROUNDS = 10;
@@ -49,7 +48,7 @@ class UserService {
       await user.update(data, { validate: true });
     } catch (err) {
       console.log(err);
-      const message = err.errors?.map((e) => e.message) || [e.message];
+      const message = err.errors?.map((e) => e.message) || [err.message];
       throw new ServerError("Gagal Update User: ", +message.join(", "));
     }
 
