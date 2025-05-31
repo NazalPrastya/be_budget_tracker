@@ -1,4 +1,5 @@
 const UserService = require("./user.service");
+const NotFound = require("../../errors/NotFoundError");
 
 class UserController {
   async getAll(req, res, next) {
