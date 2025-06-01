@@ -1,5 +1,5 @@
-const BadRequestError = require("../../errors/BadRequestError");
 const ForbiddenError = require("../../errors/ForbiddenError");
+const BadRequestError = require("../../errors/BadRequestError");
 const TransactionService = require("./transaction.service");
 
 class TransactionController {
@@ -33,13 +33,11 @@ class TransactionController {
       if (transaction.user_id !== req.userId) {
         return ForbiddenError("Kamu tidak bisa Akses transaksi ini");
       }
-      res
-        .status(200)
-        .json({
-          succes: true,
-          message: "transaksi ditemukan",
-          data: transaction,
-        });
+      res.status(200).json({
+        succes: true,
+        message: "transaksi ditemukan",
+        data: transaction,
+      });
     } catch (error) {
       next(error);
     }
@@ -52,13 +50,11 @@ class TransactionController {
         user_id: req.userId,
       };
       const transaction = await TransactionService.create(data);
-      res
-        .status(201)
-        .json({
-          succes: true,
-          message: "transaksi sudah terbuat",
-          data: transaction,
-        });
+      res.status(201).json({
+        succes: true,
+        message: "transaksi sudah terbuat",
+        data: transaction,
+      });
     } catch (error) {
       next(error);
     }
@@ -97,13 +93,11 @@ class TransactionController {
   async getMonthlySummary(req, res, next) {
     try {
       const data = await TransactionService.getMonthlySummary(req.userId);
-      res
-        .status(200)
-        .json({
-          succes: true,
-          message: "summary data berhasil di ambil",
-          data,
-        });
+      res.status(200).json({
+        succes: true,
+        message: "summary data berhasil di ambil",
+        data,
+      });
     } catch (error) {
       next(error);
     }
@@ -123,13 +117,11 @@ class TransactionController {
   async getTodayTransaction(req, res, next) {
     try {
       const data = await TransactionService.getTodayTransactions(req.userId);
-      res
-        .status(200)
-        .json({
-          succes: true,
-          message: "data transaksi hari ini berhasil di ambil",
-          data,
-        });
+      res.status(200).json({
+        succes: true,
+        message: "data transaksi hari ini berhasil di ambil",
+        data,
+      });
     } catch (error) {
       next(error);
     }
@@ -138,13 +130,11 @@ class TransactionController {
   async getTodayExpense(req, res, next) {
     try {
       const data = await TransactionService.getTodayExpenseStats(req.userId);
-      res
-        .status(200)
-        .json({
-          succes: true,
-          message: "data pengeluaran hari ini berhasil di ambil",
-          data,
-        });
+      res.status(200).json({
+        succes: true,
+        message: "data pengeluaran hari ini berhasil di ambil",
+        data,
+      });
     } catch (error) {
       next(error);
     }
