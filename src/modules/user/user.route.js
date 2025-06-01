@@ -3,6 +3,7 @@ const router = express.Router();
 
 const UserController = require("./user.controller");
 
+const authJWT = require("../../middlewares/auth.middleware");
 const asyncErrorHandler = require("../../errors/asyncErrorHandler");
 const {
   idParamValidator,
@@ -11,6 +12,7 @@ const {
 } = require("./user.validator");
 const validateRequest = require("../../middlewares/validation.middleware");
 
+router.use(authJWT);
 router.get("/", asyncErrorHandler(UserController.getAll.bind(UserController)));
 
 router.get(
