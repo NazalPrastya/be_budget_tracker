@@ -3,7 +3,8 @@ const CategoryService = require("./category.service");
 class CategoryController {
   async getAll(req, res, next) {
     try {
-      const categories = CategoryService.getAll();
+      const categories = await CategoryService.getAll();
+      console.log(categories);
       res.status(200).json({
         status: 200,
         message: "Category berhasil di ambil",
@@ -16,7 +17,7 @@ class CategoryController {
   }
   async getById(req, res, next) {
     try {
-      const category = CategoryService.getById(req.params.id);
+      const category = await CategoryService.getById(req.params.id);
       res.status(200).json({
         status: 200,
         message: "Category berhasil di ambil",
@@ -29,7 +30,7 @@ class CategoryController {
   }
   async create(req, res, next) {
     try {
-      const newCategory = CategoryService.create(req.body);
+      const newCategory = await CategoryService.create(req.body);
       res.status(201).json({
         status: 201,
         message: "Category berhasil di buat",
