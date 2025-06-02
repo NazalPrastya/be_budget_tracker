@@ -29,8 +29,8 @@ class UserService {
     return userJson;
   }
 
-  async update(id, data) {
-    const user = await User.findByPk(id);
+  async update(uuid, data) {
+    const user = await User.findOne({ where: { uuid } });
     if (!user) throw new NotFound("User tidak ditemukan");
 
     if (data.email && data.email !== user.email) {
@@ -56,8 +56,8 @@ class UserService {
     return userJson;
   }
 
-  async delete(id) {
-    const user = await User.findByPk(id);
+  async delete(uuid) {
+    const user = await User.findOne({ where: { uuid } });
     if (!user) throw new NotFound("User tidak ditemukan");
     await user.destroy();
     return true;

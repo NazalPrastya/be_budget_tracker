@@ -27,7 +27,7 @@ const createUserValidator = [
 ];
 
 const updateUserValidator = [
-  param("id").isInt().withMessage("ID harus berupa angka"),
+  param("uuid").isUUID().withMessage("ID harus berupa UUID"),
 
   body("name")
     .notEmpty()
@@ -57,7 +57,7 @@ const updateUserValidator = [
 ];
 
 const idParamValidator = [
-  param("id").isInt().withMessage("ID harus berupa angka"),
+  param("uuid").isUUID().withMessage("ID harus berupa UUID"),
 ];
 
 module.exports = {

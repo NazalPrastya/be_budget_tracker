@@ -1,5 +1,7 @@
 const UserService = require("./user.service");
 const NotFound = require("../../errors/NotFoundError");
+const UnauthorizedError = require("../../errors/UnauthorizedError");
+const jwtService = require("../auth/jwt.service");
 
 class UserController {
   async getAll(req, res, next) {
@@ -45,14 +47,28 @@ class UserController {
     }
   }
   async update(req, res, next) {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer "))
+      throw new UnauthorizedError("Token tidak valid");
+    const token = authHeader.split(" ")[1];
+
     try {
-      const userUpdate = await UserService.update(req.params.id, req.body);
-      if (!userUpdate) throw new NotFound("User tidak ditemukan");
+      const decodedToken = jwtService.verify(token);
+      let updatedUser;
+
+      if (decodedToken?.uuid === req.params.uuid) {
+        updatedUser = await UserService.update(req.params.uuid, req.body);
+      } else {
+        throw new NotFound("Anda tidak memiliki akses untuk mengubah data ini");
+      }
+
+      if (!updatedUser) throw new NotFound("User tidak ditemukan");
       res.status(200).json({
         status: 200,
         message: "User berhasil di update",
         success: true,
-        data: userUpdate,
+        data: updatedUser,
       });
     } catch (err) {
       next(err);

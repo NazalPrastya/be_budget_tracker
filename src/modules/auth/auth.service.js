@@ -24,12 +24,19 @@ class AuthService {
 
   async login({ email, password }) {
     const user = await User.findOne({ where: { email: email } });
-    if (!user) throw new BadRequestError("Email belum terdaftar");
+    if (!user)
+      throw new BadRequestError(
+        "Email belum terdaftar, harap register terlebih dulu"
+      );
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) throw new BadRequestError("Password salah");
 
-    const token = JwtService.sign({ id: user.id, email: user.email });
+    const token = JwtService.sign({
+      id: user.id,
+      uuid: user.uuid,
+      email: user.email,
+    });
     const userJson = user.toJSON();
     delete userJson.password;
 
@@ -37,7 +44,8 @@ class AuthService {
   }
 
   async profile(userId) {
-    return await User.findByPk(userId, {
+    return await User.findOne({
+      where: { uuid: userId },
       attributes: { exclude: ["password"] },
     });
   }

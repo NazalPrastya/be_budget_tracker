@@ -11,7 +11,6 @@ const asyncErrorHandle = require("../../errors/asyncErrorHandler");
 const authJWT = require("../../middlewares/auth.middleware");
 
 router.use(authJWT);
-
 router.get(
   "/",
   asyncErrorHandle(TransactionController.getAll.bind(TransactionController))

@@ -63,6 +63,7 @@ class TransactionController {
   async update(req, res, next) {
     try {
       const transaction = await TransactionService.getById(req.params.id);
+
       if (transaction.user_id !== req.userId) {
         throw new ForbiddenError("Kamu tidak bisa Akses transaksi ini");
       }

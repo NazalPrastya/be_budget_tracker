@@ -30,7 +30,7 @@ router.post(
 );
 
 router.put(
-  "/:id",
+  "/:uuid",
   idParamValidator,
   updateUserValidator,
   validateRequest,
@@ -38,7 +38,7 @@ router.put(
 );
 
 router.delete(
-  "/:id",
+  "/:uuid",
   idParamValidator,
   validateRequest,
   asyncErrorHandler(UserController.delete.bind(UserController))
