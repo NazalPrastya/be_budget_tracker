@@ -20,6 +20,13 @@ router.get(
   )
 );
 
+router.post(
+  "/generate",
+  asyncErrorHandler(
+    MonthlySummaryController.generate.bind(MonthlySummaryController)
+  )
+);
+
 router.get(
   "/:id",
   idParamValidator,
