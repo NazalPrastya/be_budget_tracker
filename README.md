@@ -33,7 +33,7 @@ Follow these steps to get the backend up and running on your local machine:
     ```bash
     npm start
     ```
-    The server should now be running, typically on `http://localhost:3000` (or the port you configured in your `.env` file).
+    The server should now be running, typically on `http://localhost:5001` (or the port you configured in your `.env` file).
 
 ---
 
